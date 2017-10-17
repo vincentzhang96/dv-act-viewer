@@ -1,6 +1,9 @@
 <template>
   <div class="timeline">
     <h2>Timeline</h2>
+    <div class="container">
+      <div class="track"></div>
+    </div>
   </div>
 </template>
 
@@ -32,6 +35,11 @@ export default {
       padding: 0 4px;
       margin: 0;
       font-weight: normal;
+    }
+
+    .container {
+      width: 100%;
+      overflow-x: scroll;
     }
 }
 </style>

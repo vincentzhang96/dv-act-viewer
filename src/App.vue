@@ -54,7 +54,7 @@ p {
   height: 40px;
   padding: 8px 16px;
   font-size: 40px;
-  background-color: #F8F8FF;
+  background-color: @dv-c-background-card;
   position: fixed;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 

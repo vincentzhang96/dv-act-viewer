@@ -2,7 +2,7 @@
   <div class="propsheet">
     <div class="wrapper" v-if="actblock">
       <div class="left">
-        <h3>Block</h3>
+        <h3>Block Info</h3>
         <table>
           <tr>
             <th>Type</th>
@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <th>Tags</th>
-            <td> {{ actblock.categories }}</td>
+            <td><span v-for="c in actblock.categories" :key="c" class="tag">{{ c }}</span></td>
           </tr>
         </table>
       </div>
@@ -129,6 +129,19 @@ export default {
     .right {
       flex: 1 1 auto;
       margin-left: 20px;
+    }
+  }
+
+  .tag {
+    display: inline-block;
+    margin: 0 0.2em;
+    padding: 0.1em 0.4em;
+    font-weight: bold;
+    color: @dv-c-background;
+    background-color: @dv-c-foreground;
+
+    &:first-child {
+      margin-left: 0;
     }
   }
 }

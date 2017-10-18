@@ -15,3 +15,44 @@
 
 @dv-f-lato: Lato, "Segoe UI", Tahoma, Verdana, sans-serif;
 @dv-f-geomanist: Geomanist, "Segoe UI", Tahoma, Verdana, sans-serif;
+
+
+h1, h2, h3, h4 {
+    font-family: @dv-f-geomanist;
+    letter-spacing: 0.025em;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+th, td {
+    text-align: left;
+    padding: 2px 10px 2px 4px;
+    border: 1px solid @dv-c-accent-1;
+}
+
+table {
+    border: 1px solid @dv-c-accent-1;
+    border-collapse: collapse;
+    margin: 8px 0;
+}
+
+button {
+    background: @dv-c-background;
+    color: @dv-c-foreground;
+    text-transform: uppercase;
+    font-family: @dv-f-lato;
+    height: 30px;
+    border-color: @dv-c-foreground;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+
+    &:hover {
+        background: @dv-c-foreground;
+        color: @dv-c-background;
+    }
+}

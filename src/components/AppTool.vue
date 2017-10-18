@@ -1,10 +1,7 @@
 <template>
   <div class="tool">
     <div class="loader">
-      <div v-if="loadedFileName" class="loaded">
-        Using {{ loadedFileName }}
-      </div>
-      <div v-else class="prompt">
+      <div v-if="!loadedFileName" class="prompt">
         <div class="card">          
           <h2>Load an ACT action file</h2>
           <p>
@@ -18,8 +15,31 @@
         </div>
       </div>
     </div>
-    <div v-if="action">
-      <time-line></time-line>
+    <div v-if="action" class="content">
+      <h2>{{ action.actionName }}</h2>
+      <button v-on:click="unload">Unload</button>
+      <table>
+        <tr>
+          <th>Animation</th>
+          <td>{{ action.aniName }}</td>
+        </tr>
+        <tr>
+          <th>Default Next Action</th>
+          <td>{{ action.defaultNextActionName }}</td>
+        </tr>
+        <tr>
+          <th>Frame Count</th>
+          <td>{{ action.lastFrameNumber + 1 }} primary, {{ action.blendFrameCount }} blend, {{ action.nextActionFrameCount }} next</td>
+        </tr>
+        <tr>
+          <th>Block Count</th>
+          <td>{{ action.blocks.length }}</td>
+        </tr>
+      </table>
+      <time-line :action="action" v-on:selectb="select"></time-line>
+      <div v-if="activeBlock">
+        <property-sheet :actblock="activeBlock"></property-sheet>
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +53,8 @@ export default {
   data() {
       return {
         loadedFileName: "",
-        action: null
+        action: null,
+        activeBlock: null
       }
   },
   components: {
@@ -47,9 +68,25 @@ export default {
       this.loadFile(file);
     },
     loadFile(file) {
-      let dataStr = FileReader.readAsText(file);
-      let data = JSON.parse(dataStr);
-      console.log(data);
+      let reader = new FileReader();
+      let thiss = this;
+      reader.onload = function(e) {
+        let data = reader.result;
+        let action = JSON.parse(data);
+        thiss.action = action;
+        thiss.loadedFileName = file.name;
+        console.log("Loaded " + action.actionName);
+      };
+
+      reader.readAsText(file);
+    },
+    select(block) {
+      this.activeBlock = block;
+    },
+    unload() {
+      this.loadedFileName = "";
+      this.action = null;
+      this.activeBlock = null;
     }
   }
 }
@@ -61,6 +98,17 @@ export default {
 .tool {
   position: relative;
   
+  .link {
+    color: @dv-c-accent-1;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color ease-in 0.125s;
+
+    &:hover {
+      color: @dv-c-accent-2;
+    }
+  }
+
   .loader {
     .prompt {
       position: fixed;
@@ -84,18 +132,19 @@ export default {
           margin: 0;
           padding: 0;
         }
-
-        .link {
-          color: @dv-c-accent-1;
-          cursor: pointer;
-          font-weight: bold;
-          transition: color ease-in 0.125s;
-
-          &:hover {
-            color: @dv-c-accent-2;
-          }
-        }
       }
+    }
+  }
+
+  .content {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    h2 {
+      color: #444;
+      margin: 8px 0;
+      padding: 0.2em 8px;
+      border-left: 4px solid @dv-c-accent-1;
     }
   }
 }

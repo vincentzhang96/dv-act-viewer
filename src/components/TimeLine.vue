@@ -148,8 +148,9 @@ export default {
           line-height: 1em;
           vertical-align: 35%;
           border-right: 1px solid @dv-c-accent-2;
-          border-bottom: 2px solid black;
+          border-bottom: 2px solid @dv-c-accent-2;
           box-sizing: border-box;
+          cursor: default;
           
         }
       }
@@ -176,9 +177,10 @@ export default {
               min-width: 5px;
               position: absolute;
               background: #AAA;
+              cursor: crosshair;
 
               &.active {
-                border-color: #FFF;
+                border-color: #FFF !important;
                 // border-width: 3px;
                 // animation: pulse 2s infinite;
                 box-shadow: 0px 0px 10px 7px #8CF,
@@ -202,7 +204,8 @@ export default {
                 background: #AAA;
               }
               &.block-01input {
-                background: #000;
+                background: #111;
+                border-color: #444;
               }
               &.block-02enablemovement {
                 background: #07A;
@@ -243,6 +246,9 @@ export default {
               &.block-21effect {
                 background: #8C8;
               }
+              &.block-25actionobject {
+                background: #FC0;
+              }
 
               &.block-2cswordtrail {
                 background: #686;
@@ -271,6 +277,10 @@ export default {
 
               &.block-4eparry {
                 background: #424;
+              }
+              &.block-4fparticleloopend {
+                background: #0F0;
+                border-color: #F00;
               }
 
               &.block-5cselfeffect {

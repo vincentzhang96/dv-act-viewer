@@ -29,7 +29,7 @@
       <div v-if="fields" class="right">
         <h3>{{ humanName(actblock) }} Parameters</h3>
         <table>
-          <tr v-for="(v, k) in fields">
+          <tr v-for="(v, k) in fields" :key="k">
             <th>{{ k }}</th>
             <td>{{ v }}</td>
           </tr>

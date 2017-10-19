@@ -10,7 +10,7 @@
           </div>
           <div v-for="track in tracks" :key="track.id" class="row">
             <div v-for="b in track.blocks" :key="blockId(b)">
-              <div :class="`datablock ${bgColorClass(b)} ${selected == blockId(b) ? 'active' : ''}`" :style="`width: ${(b.endFrame - b.startFrame)*8}px;left: ${b.startFrame*8}px;`" v-on:click="select(b)"></div>
+              <div :class="`datablock ${bgColorClass(b)} ${selected == blockId(b) ? 'active' : ''} ${b.categories.join(' ').toLowerCase()}`" :style="`width: ${(b.endFrame - b.startFrame)*8}px;left: ${b.startFrame*8}px;`" v-on:click="select(b)"></div>
             </div>
           </div>
         </div>

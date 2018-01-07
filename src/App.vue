@@ -5,6 +5,7 @@
       <div class="title">
         Divinitor DN
         <div class="subtitle">ACT Action Viewer</div>
+        <div class="version">v0.1.0</div>
       </div>
     </div>
     <div class="headfix"></div>
@@ -94,6 +95,14 @@ p {
       position: absolute;
       bottom: -6px;
       left: 24px;
+    }
+
+    .version {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      position: absolute;
+      right: 2em;
+      top: 1.66em;
     }
   }
 

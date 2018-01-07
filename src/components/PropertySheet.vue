@@ -21,6 +21,10 @@
             <td> {{ actblock.endFrame }} ({{ (actblock.endFrame / 60).toFixed(2) }}s)</td>
           </tr>
           <tr>
+            <th>Duration</th>
+            <td> {{ actblock.endFrame - actblock.startFrame }} ({{ ((actblock.endFrame - actblock.startFrame) / 60).toFixed(2) }}s)</td>
+          </tr>
+          <tr>
             <th>Tags</th>
             <td><span v-for="c in actblock.categories" :key="c" class="tag">{{ c }}</span></td>
           </tr>
@@ -67,6 +71,19 @@ export default {
       Object.assign(f, this.actblock.fields);
       if (f.hasOwnProperty("damageCoefficient")) {
         f.damageCoefficient = f.damageCoefficient + "%";
+      }
+
+      if (f.hasOwnProperty("superArmorChance1")) {
+        f.superArmorChance1 = f.superArmorChance1 * 100;
+      }
+      if (f.hasOwnProperty("superArmorChance2")) {
+        f.superArmorChance2 = f.superArmorChance2 * 100;
+      }
+      if (f.hasOwnProperty("superArmorChance3")) {
+        f.superArmorChance3 = f.superArmorChance3 * 100;
+      }
+      if (f.hasOwnProperty("superArmorChance4")) {
+        f.superArmorChance4 = f.superArmorChance4 * 100;
       }
 
       let ret = {};

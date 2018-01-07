@@ -10,7 +10,7 @@
           </p>
           <form>
             <input id="file-upload" type="file" hidden v-on:change.prevent="selectFile"/>
-            Drag-n-drop or <label class="link" for="file-upload">select a file</label>.
+            <label class="link" for="file-upload">Select a file</label>.
           </form>
         </div>
       </div>
@@ -18,6 +18,10 @@
     <div v-if="action" class="content">
       <h2>{{ action.actionName }}</h2>
       <button v-on:click="unload">Unload</button>
+      <form>
+        <input id="file-upload" type="file" hidden v-on:change.prevent="selectFile"/>
+        <label class="link" for="file-upload">Load another file</label>
+      </form>
       <table>
         <tr>
           <th>Animation</th>
@@ -25,7 +29,8 @@
         </tr>
         <tr>
           <th>Default Next Action</th>
-          <td>{{ action.defaultNextActionName }}</td>
+          <td v-if="action.defaultNextActionName">{{ action.defaultNextActionName }}</td>
+          <td v-else>&lt;none&gt;</td>
         </tr>
         <tr>
           <th>Frame Count</th>
@@ -34,6 +39,10 @@
         <tr>
           <th>Block Count</th>
           <td>{{ action.blocks.length }}</td>
+        </tr>
+        <tr>
+          <th>Raw Runtime</th>
+          <td>{{ ((action.lastFrameNumber + 1)/60).toFixed(2) }}s</td>
         </tr>
       </table>
       <time-line :action="action" v-on:selectb="select"></time-line>

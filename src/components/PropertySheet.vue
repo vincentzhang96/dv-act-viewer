@@ -14,11 +14,11 @@
           </tr>
           <tr>
             <th>Start Frame</th>
-            <td> {{ actblock.startFrame }} ({{ (actblock.startFrame / 60).toFixed(2) }}s)</td>
+            <td> {{ actblock.startFrame }} ({{ (actblock.startFrame / 60).toFixed(2) }}s) 0x{{actblock.startFrame.toString(16).toUpperCase()}}</td>
           </tr>
           <tr>
             <th>End Frame</th>
-            <td> {{ actblock.endFrame }} ({{ (actblock.endFrame / 60).toFixed(2) }}s)</td>
+            <td> {{ actblock.endFrame }} ({{ (actblock.endFrame / 60).toFixed(2) }}s) 0x{{actblock.endFrame.toString(16).toUpperCase()}}</td>
           </tr>
           <tr>
             <th>Duration</th>
@@ -27,6 +27,10 @@
           <tr>
             <th>Tags</th>
             <td><span v-for="c in actblock.categories" :key="c" class="tag">{{ c }}</span></td>
+          </tr>
+          <tr v-if="actblock._kitFileName">
+            <th>Kit File</th>
+            <td>{{ actblock._kitFileName }}</td>
           </tr>
         </table>
       </div>

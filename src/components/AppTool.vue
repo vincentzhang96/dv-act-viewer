@@ -1,8 +1,8 @@
 <template>
-  <div class="tool">
+  <div class="tool" ref="dropzone">
     <div class="loader">
       <div v-if="!loadedFileName" class="prompt">
-        <div class="card">          
+        <div class="card">
           <h2>Load an ACT action file</h2>
           <p>
             Please export an ACT action from STARGAZER and 
@@ -70,6 +70,10 @@ export default {
     TimeLine,
     PropertySheet
   },
+  mounted() {
+    this.$refs.dropzone.addEventListener("drop", (e) => this.onDrop(e));
+    this.$refs.dropzone.addEventListener("dragover", (e) => this.dragOver(e));
+  },
   methods: {
     selectFile(evt) {
       let files = evt.target.files;
@@ -96,6 +100,34 @@ export default {
       this.loadedFileName = "";
       this.action = null;
       this.activeBlock = null;
+    },
+    dragOver(ev) {
+      ev.preventDefault();
+    },
+    onDrop(ev) {
+      ev.preventDefault();
+      let file = null;
+      if (ev.dataTransfer.items) {
+        for (let i = 0; i < ev.dataTransfer.items.length; ++i) {
+          if (ev.dataTransfer.items[i].kind === 'file') {
+            file = ev.dataTransfer.items[i].getAsFile();
+            break;
+          }
+        }
+      } else {
+        for (let i = 0; i < ev.dataTransfer.files.length; ++i) {
+          file = ev.dataTransfer.files[i];
+          break;
+        }
+      }
+
+      if (file != null) {
+        this.loadFile(file);
+      }
+
+      if (ev.dataTransfer.items) {
+        ev.dataTransfer.items.clear();l
+      }
     }
   }
 }
@@ -106,6 +138,7 @@ export default {
 
 .tool {
   position: relative;
+  height: 100vh;
   
   .link {
     color: @dv-c-accent-1;
